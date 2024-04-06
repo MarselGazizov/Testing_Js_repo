@@ -72,21 +72,43 @@ $("#idForm").submit(function(e) {
 
 
   <script type="text/javascript">
-      import OpenAI from 'https://deno.land/x/openai@v4.33.0/mod.ts';
+      // import OpenAI from 'https://deno.land/x/openai@v4.33.0/mod.ts';
 
 
-      const { Configuration, OpenAIApi } = require("openai");
+      // const { Configuration, OpenAIApi } = require("openai");
 
-      const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
-      });
-      const openai = new OpenAIApi(configuration);
+      // const configuration = new Configuration({
+      //   apiKey: process.env.OPENAI_API_KEY,
+      // });
+      // const openai = new OpenAIApi(configuration);
 
-      const completion = await openai.createCompletion({
-        model: "text-davinci-002",
-        prompt: "Hello world",
-      });
-      console.log(completion.data.choices[0].text);
+      // const completion = await openai.createCompletion({
+      //   model: "text-davinci-002",
+      //   prompt: "Hello world",
+      // });
+      // console.log(completion.data.choices[0].text);
+
+      fetch('https://api.example.com/data', {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+        },
+        body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [JSON.stringify({
+        role: 'user',
+        content: 'what?'
+        })]
+        })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error))
+
+    
+
+      
   </script>
 
 </body>
