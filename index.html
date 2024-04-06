@@ -1,1 +1,97 @@
-<h1>Hello js</h1>
+<!-- // this is the id of the form
+$("#idForm").submit(function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this);
+    var actionUrl = form.attr('action');
+    $.ajax({
+        type: "POST",
+        url: actionUrl,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          alert(data); // show response from the php script.
+        }
+    });
+});
+
+
+
+<!DOCTYPE HTML>
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+  <form id="contactForm1" action="/your_url" method="post">
+    <!-- Form input fields here (do not forget your name attributes). -->
+    <input type="text" name="msg" placeholder="msg" />
+  </form>
+
+
+
+  <script type="text/javascript">
+      var frm = $('#contactForm1');
+  
+      frm.submit(function (e) {
+  
+          e.preventDefault();
+  
+          $.ajax({
+              type: frm.attr('method'),
+              url: frm.attr('action'),
+              data: frm.serialize(),
+              success: function (data) {
+                  console.log('Submission was successful.');
+                  console.log(data);
+              },
+              error: function (data) {
+                  console.log('An error occurred.');
+                  console.log(data);
+              },
+          });
+      });
+  </script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE HTML>
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+  <form id="contactForm1" action="/your_url" method="post">
+    <!-- Form input fields here (do not forget your name attributes). -->
+    <input type="text" name="msg" placeholder="msg" />
+  </form>
+
+
+
+  <script type="text/javascript">
+      import OpenAI from 'https://deno.land/x/openai@v4.33.0/mod.ts';
+
+
+      const { Configuration, OpenAIApi } = require("openai");
+
+      const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+      const openai = new OpenAIApi(configuration);
+
+      const completion = await openai.createCompletion({
+        model: "text-davinci-002",
+        prompt: "Hello world",
+      });
+      console.log(completion.data.choices[0].text);
+  </script>
+
+</body>
+</html> 
+
+
+
+
